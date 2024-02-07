@@ -5,65 +5,67 @@
   <title>TheBigQuestion</title>
   <style>
     .background {
-      background-color: #28CECE;
-      padding: 20px;
-      display: flex; /* Add flex display for vertical alignment */
-      flex-direction: column; /* Arrange elements vertically */
-      justify-content: center; /* Center elements vertically */
-      align-items: center; /* Center elements horizontally */
-      height: 100vh;
+        background-color: #28CECE;
+        padding: 20px;
     }
 
     #noButton {
-      position: absolute;
+        position: absolute;
     }
 
     .picture {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        padding-bottom: 5px;
+        padding-top: 10px;
+        border-radius: 50%;
     }
 
     .title {
         text-align: center;
         padding-top: 100px;
-        margin-right: 30px;
-        margin-left: 50px;
-    }
-
-    .button-container {
-        /* display: flex; */ /* Remove flex display */
-        /* justify-content: center; */ /* Remove centering */
-        margin-bottom: 20px; /* Add space between the image and buttons */
     }
 
     .button-33 {
         background-color: #c2fbd7;
         border-radius: 100px;
-        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-        color: green;
+        box-shadow: rgba(243, 131, 215, 0.2) 0 -25px 18px -14px inset,rgba(243, 131, 215, 0.2) 0 1px 2px,rgba(243, 131, 215, 0.2) 0 2px 4px,rgba(243, 131, 215, 0.2) 0 4px 8px,rgba(243, 131, 215, 0.2) 0 8px 16px,rgba(243, 131, 215, 0.2) 0 16px 32px;
+        color: #d54d7b;
         cursor: pointer;
-        display: inline-block; /* Display buttons inline */
-        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-        padding: 7px 20px;
+        display: inline-block;
+        font-family: "Great Vibes", cursive; 
+        padding: 7px 40px;
         text-align: center;
         text-decoration: none;
         transition: all 250ms;
         border: 0;
-        font-size: 16px;
+        font-size: 20px;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
-        margin-right: 30px; /* Space between buttons */
+        margin-right:30px;
     }
+
     .button-33:hover {
-        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        box-shadow: rgba(243, 131, 215, 0.2) 0 -25px 18px -14px inset,rgba(243, 131, 215, 0.2) 0 1px 2px,rgba(243, 131, 215, 0.2) 0 2px 4px,rgba(243, 131, 215, 0.2) 0 4px 8px,rgba(243, 131, 215, 0.2) 0 8px 16px,rgba(243, 131, 215, 0.2) 0 16px 32px;
         transform: scale(1.05) rotate(-1deg);
     }
 
-    .container {
+    .button-container {
         text-align: center;
+        margin-right: 80px;
+        margin-bottom:20px;
+    }
+.h1 {
+        color: #d54d7b; 
+        font-family: "Great Vibes", cursive; 
+        font-size: 100px; 
+        line-height: 160px; 
+        font-weight: normal; 
+        margin-bottom: 80px; 
+        margin-top: 40px; 
+        text-align: center; 
+        text-shadow: 0 1px 1px #fff; 
     }
   </style>
 </head>
@@ -83,32 +85,40 @@
   </div>
 
   <script>
+    var hoverCount = 0;
+  
     function nextPage() {
       window.location.href = "yes.html";
     }
   
-    function moveButton() { 
-      var button = document.getElementById("noButton"); 
-      var pageWidth = window.innerWidth - button.offsetWidth - 40; 
-      var pageHeight = window.innerHeight - button.offsetHeight - 40; 
-      var newX = Math.floor(Math.random() * pageWidth); 
-      var newY = Math.floor(Math.random() * pageHeight); 
-      button.style.left = newX + "px"; 
-      button.style.top = newY + "px"; 
+    function moveButton() {
+      var button = document.getElementById("noButton");
+      var pageWidth = window.innerWidth - button.offsetWidth - 40;
+      var pageHeight = window.innerHeight - button.offsetHeight - 40;
+      var newX = Math.floor(Math.random() * pageWidth);
+      var newY = Math.floor(Math.random() * pageHeight);
+      button.style.left = newX + "px";
+      button.style.top = newY + "px";
+  
+      // Increment hover count and check if it's reached 10
+      hoverCount++;
+      if (hoverCount >= 10) {
+        window.location.href = "notNice.html";
+      }
     }
   
-    // Function to check if the user is using a mobile device
     function isMobileDevice() {
       return /Mobi|Android/i.test(navigator.userAgent);
     }
   
-    // Check if the user is using a mobile device and change button behavior accordingly
-    window.onload = function() {
+    window.onload = function () {
       var noButton = document.getElementById("noButton");
       if (isMobileDevice()) {
-        // If user is on a mobile device, change button behavior to onclick
+        // On mobile devices, handle both mouseover and click events
         noButton.removeAttribute("onmouseover");
-        noButton.setAttribute("onclick", "moveButton()");
+        noButton.addEventListener("click", function() {
+          moveButton();
+        });
       }
     };
   </script>
